@@ -9,7 +9,7 @@ export default {
     extend: {
       boxShadow: {
         'darkMode': '0 10px 15px -3px rgb(255 255 255 / 0.1), 0 4px 6px -4px rgb(255 255 255 / 0.1)',
-        'dark-box': '0px 6px 10px 4px rgb(0 0 0 / 0.5)'
+        'dark-box': '0px 6px 10px 4px rgb(0 0 0 / 0.3)'
       },
       screens: {
         'phone': '280px'

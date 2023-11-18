@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
 import { useAppSelector } from "store"
 import cn from 'classnames'
+import { useNavigate } from "react-router-dom"
 
 export const Navbar = () => {
+    const navigate = useNavigate()
     const { token } = useAppSelector(state => state.Auth)
     const { UserByID } = useAppSelector(state => state.User)
     const DropDown = () => {
@@ -30,7 +32,7 @@ export const Navbar = () => {
         <div className="fixed w-full z-50">
             <nav className={cn("border-gray-200  shadow-lg dark:shadow-darkMode", { 'bg-white-rgba duration-700': !setScroll, 'bg-white dark:bg-gray-900 duration-700': setScroll })}>
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-                    <a href="https://flowbite.com/" className="flex items-center space-x-3 rtl:space-x-reverse">
+                    <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse" onClick={() => { navigate("/") }}>
                         <img src="/images/logo (3).png" className="h-[30px] sm:h-[45px] mr-2 sm:mr-3 rounded-[50%]" alt="Flowbite Logo" />
                         <span className="self-center text-2xl font-semibold whitespace-nowrap text-white drop-shadow-logo">Travelet</span>
                     </a>

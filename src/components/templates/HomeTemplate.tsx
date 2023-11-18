@@ -5,6 +5,8 @@ import 'swiper/css/pagination';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'store';
 import { LocationByPageThunk, LocationThunk } from 'store/Location';
+import '../layout/style.css'
+import { url } from 'inspector';
 
 export const HomeTemplate = () => {
   const TouristAttraction = [
@@ -33,7 +35,7 @@ export const HomeTemplate = () => {
   window.addEventListener('resize', handleScreen);
   let slidesPerView = 0
   let spaceBetween = 0
-  if (setScreen < 639) { slidesPerView = 1; spaceBetween = 10 } else { slidesPerView = 3; spaceBetween = 10 }
+  if (setScreen < 639) { slidesPerView = 1; spaceBetween = 0 } else if (setScreen < 1024) { slidesPerView = 2; spaceBetween = 10 } else { slidesPerView = 3; spaceBetween = 10 }
   return (
     <div>
       <div className='relative'>
@@ -67,17 +69,18 @@ export const HomeTemplate = () => {
           <button className='mt-1 sm:mt-0 sm:mx-0 sm:mr-7 w-full sm:w-auto border sm:px-3 py-2 rounded-md sm:rounded-[50%] bg-gradient-to-br from-cyan-300 to-blue-600'><i className="fa-solid fa-magnifying-glass text-white"></i></button>
         </div>
       </div>
-      <div className='max-w-screen-xl m-auto sm:pt-8 px-[20px] sm:px-[30px]'>
+      {/* Explore Nearby Destinations */}
+      <div className='max-w-screen-xl m-auto sm:pt-8 px-[15px] sm:px-[30px]'>
         <div className='w-full'>
           <h1 className='title-home'>Explore Nearby Destinations</h1>
           <div className='grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 sm:gap-5'>
             {
               locationByPage?.map(a => (
-                <div className='bg-white rounded-lg'>
-                  <div className='flex items-center p-2 sm:p-3'>
-                    <img className='h-12 w-12 sm:h-20 sm:w-20 rounded-lg' src={a.hinhAnh} alt="" />
+                <div className='bg-white rounded-lg hover:bg-cyan-100 transition-all duration-500 cursor-pointer'>
+                  <div className='flex items-center p-1 sm:p-2'> 
+                    <img className='h-14 w-14 sm:h-24 sm:w-24 rounded-lg' src={a.hinhAnh} alt="" />
                     <div className='ml-2'>
-                      <p className='label'>{a.tenViTri}</p>
+                      <p className='label text-[17px] sm:text-[22px] font-[700]'>{a.tenViTri}</p>
                       <p className='label'>{a.tinhThanh}<span className='phone:hidden sm:inline'>, {a.quocGia}</span></p>
                     </div>
                   </div>
@@ -86,8 +89,9 @@ export const HomeTemplate = () => {
             }
           </div>
         </div>
+        {/* Explore Tourist Attraction */}
         <div className='w-full'>
-          <h1 className='title-home'>Explore Tourist Attraction</h1>
+          <h1 className='title-home mb-0 sm:mb-5'>Explore Tourist Attraction</h1>
           <Swiper
             slidesPerView={slidesPerView}
             spaceBetween={spaceBetween}
@@ -98,23 +102,24 @@ export const HomeTemplate = () => {
               disableOnInteraction: false
             }}
             centerInsufficientSlides={true}
-            className=" py-5"
+            className="py-5"
           >
             {
               TouristAttraction?.map((a, index) => (
-                <SwiperSlide key={index}><div className='relative px-3 sm:hover:-translate-y-4 sm:transition-all sm:duration-700'><div className='div-carousel'><p className='p-carousel'>{a.viTri}</p><p className='title-carousel'>{a.tinhThanh}</p></div><img className='img-carousel' src={`/images/carousel-(${index + 1}).jpg`} alt="" /></div></SwiperSlide>
+                <SwiperSlide><div key={a.viTri} className='relative px-3 sm:hover:-translate-y-4 sm:transition-all sm:duration-700'><div className='div-carousel'><p className='title-carousel'>{a.viTri}</p><p className='p-carousel'>{a.tinhThanh}</p></div><img className='img-carousel' src={`/images/carousel-${index + 1}.jpg`} alt="" /></div></SwiperSlide>
               ))
             }
           </Swiper>
         </div>
-        <div className='w-full'>
+        {/* Explore Tourist Hobby */}
+        <div className='w-full -mt-4 sm:mb-5'>
           <h1 className='title-home'>Explore Tourist Hobby</h1>
-          <div className='grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8'>
+          <div className='grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8'>
             {
               TouristHobby?.map((a, index) => (
                 <div className='relative hover:-translate-y-4 transition-all duration-700'>
-                  <img className='rounded-lg cursor-pointer shadow-dark-box' src={`/images/hobbyTravel-(${index + 1}).jpg`} alt="" />
-                  <div className='div-carousel'><p className='p-carousel'>{a.viTri}</p></div>
+                  <img className='rounded-lg cursor-pointer shadow-dark-box' src={`/images/hobbyTravel-${index + 1}.jpg`} alt="" />
+                  <div className='div-service'><p className='title-service'>{a.viTri}</p></div>
                 </div>
               ))
             }
