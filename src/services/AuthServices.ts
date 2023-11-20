@@ -1,4 +1,4 @@
-import { apiInstance } from "constant/apiInstance"
+import { apiInstance } from "constant"
 import { LoginSchemaType, RegisterSchemaType } from "schema"
 import { Signin } from "types"
 

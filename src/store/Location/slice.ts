@@ -19,7 +19,6 @@ const locationSlice = createSlice({
                 state.location = payload
             })
             .addCase(LocationByPageThunk.fulfilled, (state, {payload})=>{
-                console.log('payload', payload)
                 state.locationByPage = payload
             })
     },

@@ -23,6 +23,9 @@ export default {
       colors: {
         'white-rgba': 'rgba(255, 255, 255, 0.4)',
       },
+      gridTemplateColumns: {
+        'search': 'repeat(4, 1fr) 48px',
+      },
     },
   },
   plugins: [],

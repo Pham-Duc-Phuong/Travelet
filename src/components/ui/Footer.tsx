@@ -11,7 +11,7 @@ export const Footer = () => {
                 <span className="self-center text-4xl font-semibold whitespace-nowrap text-white drop-shadow-logo">Travelet</span>
               </a>
             </div>
-            <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
+            <div className="flex flex-wrap sm:grid gap-8 sm:gap-6 sm:grid-cols-3">
               <div>
                 <h2 className="title-carousel mb-6">Resources</h2>
                 <ul className="text-gray-500 dark:text-gray-400 font-medium">

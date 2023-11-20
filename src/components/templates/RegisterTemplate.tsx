@@ -1,10 +1,4 @@
-import { useForm, SubmitHandler } from 'react-hook-form'
-import { RegisterSchema, RegisterSchemaType } from 'schema'
-import { zodResolver } from "@hookform/resolvers/zod"
-import { Input } from 'components'
-import { AuthService } from 'services'
-import { toast } from 'react-toastify'
-
+import { useForm, SubmitHandler } from 'react-hook-form'; import { RegisterSchema, RegisterSchemaType } from 'schema'; import { zodResolver } from "@hookform/resolvers/zod"; import { Input } from 'components'; import { AuthService } from 'services'; import { toast } from 'react-toastify';
 export const RegisterTemplate = () => {
   const { register, handleSubmit, formState: { errors } } = useForm<RegisterSchemaType>({
     mode: 'onChange',

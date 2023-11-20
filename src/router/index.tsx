@@ -1,7 +1,7 @@
 import { RouteObject } from "react-router-dom";
 import { Authlayout, Mainlayout } from "components"
 import { PATH } from "constant";
-import { Home, Login, Register } from "pages";
+import { Home, Location, Login, Register } from "pages";
 
 export const router: RouteObject[] = [
     {
@@ -11,7 +11,11 @@ export const router: RouteObject[] = [
             {
                 index: true,
                 element: <Home />
-            }
+            },
+            {
+                path: PATH.location,
+                element: <Location />
+            },
         ]
     },
     {

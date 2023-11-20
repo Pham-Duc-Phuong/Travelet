@@ -1,13 +1,4 @@
-import { zodResolver } from "@hookform/resolvers/zod"
-import { Input } from "components"
-import { useForm, SubmitHandler } from "react-hook-form"
-import { LoginSchema, LoginSchemaType } from "schema"
-import { useAppDispatch, useAppSelector } from "store"
-import { SigninThunk } from "store/Auth"
-import { toast } from "react-toastify"
-import { useNavigate } from "react-router-dom"
-import { Button } from "antd"
-
+import { zodResolver } from "@hookform/resolvers/zod"; import { Input } from "components"; import { useForm, SubmitHandler } from "react-hook-form"; import { LoginSchema, LoginSchemaType } from "schema"; import { useAppDispatch, useAppSelector } from "store"; import { SigninThunk } from "store/Auth"; import { toast } from "react-toastify"; import { useNavigate } from "react-router-dom"; import { Button } from "antd";
 export const LoginTemplate = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
