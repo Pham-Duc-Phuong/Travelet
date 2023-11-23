@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { Location, LocationByPage } from "types"
+import { Location } from "types"
 import { LocationByPageThunk, LocationThunk } from "."
 
 type locationInitalState = {
@@ -15,10 +15,10 @@ const locationSlice = createSlice({
     reducers: {},
     extraReducers(builder) {
         builder
-            .addCase(LocationThunk.fulfilled, (state, {payload})=>{
+            .addCase(LocationThunk.fulfilled, (state, { payload }) => {
                 state.location = payload
             })
-            .addCase(LocationByPageThunk.fulfilled, (state, {payload})=>{
+            .addCase(LocationByPageThunk.fulfilled, (state, { payload }) => {
                 state.locationByPage = payload
             })
     },

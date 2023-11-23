@@ -30,7 +30,7 @@ export const Navbar = () => {
     }, [])
     return (
         <div className="fixed w-full z-50">
-            <nav className={cn("border-gray-200  shadow-lg dark:shadow-darkMode", { 'bg-white-rgba duration-700': !setScroll, 'bg-white dark:bg-gray-900 duration-700': setScroll })}>
+            <nav className={cn("border-gray-200 shadow-lg transition-all duration-500", { 'bg-white-rgba': !setScroll, 'bg-white': setScroll })}>
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                     <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse" onClick={() => { navigate("/") }}>
                         <img src="/images/logo (3).png" className="h-[30px] sm:h-[45px] mr-2 sm:mr-3 rounded-[50%]" alt="Flowbite Logo" />
@@ -72,7 +72,7 @@ export const Navbar = () => {
                     <div className="items-center justify-between w-full phone:hidden md:block md:w-auto md:order-1" id="navbar-user">
                         <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:bg-transparent md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                             <li>
-                                <a href="#" className="a-navbar-menu">Home</a>
+                                <a href="#" className="a-navbar-menu" onClick={() => { navigate('/') }}>Home</a>
                             </li>
                             <li>
                                 <a href="#" className="a-navbar-menu">About</a>

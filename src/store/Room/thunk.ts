@@ -3,9 +3,20 @@ import { RoomServices } from "services";
 
 export const layPhongTheoViTriThunk = createAsyncThunk(
     "layPhongTheoViTriThunk",
-    async (payload: number, {rejectWithValue}) => { 
+    async (payload: string, { rejectWithValue }) => {
         try {
             const data = await RoomServices.layPhongTheoViTri(payload)
+            return data.data.content
+        } catch (error) {
+            return rejectWithValue(error)
+        }
+    }
+)
+export const layPhongTheoIDThunk = createAsyncThunk(
+    "layPhongTheoIDThunk",
+    async (payload: string, { rejectWithValue }) => {
+        try {
+            const data = await RoomServices.layPhongTheoID(payload)
             return data.data.content
         } catch (error) {
             return rejectWithValue(error)

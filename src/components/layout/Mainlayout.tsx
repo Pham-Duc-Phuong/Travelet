@@ -8,7 +8,9 @@ export const Mainlayout = () => {
             <div className="dark:bg-[#111827]">
                 <Outlet />
             </div>
-            <Footer />
+            <div className="">
+                <Footer />
+            </div>
         </div>
     )
 }

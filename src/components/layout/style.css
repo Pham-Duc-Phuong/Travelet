@@ -1,4 +1,22 @@
 .bg-carousel {
-    background-color: #FBDA61;
-    background-image: linear-gradient(45deg, #FBDA61 0%, #FF5ACD 100%);
+    background-color: #ffd4d3;
+    background-image: linear-gradient(45deg, #ffd4d3 0%, #ffffff 100%);
+    transition: all;
+}
+
+.container-page {
+    padding-top: 120px;
+    margin: auto;
+    max-width: 1280px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+@media only screen and (max-width: 680px) {
+    .container-page {
+        padding-top: 100px;
+        max-width: 100%;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
 }

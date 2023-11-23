@@ -3,12 +3,14 @@ import { rootReducers } from "./rootReducer";
 import { configureStore } from "@reduxjs/toolkit";
 import { getUserByIDThunk } from "./Users";
 import { getID } from "utils";
+import { LocationThunk } from "./Location";
 
 export const store = configureStore({
     reducer: rootReducers
 })
 
 store.dispatch(getUserByIDThunk(getID()))
+store.dispatch(LocationThunk())
 
 // UseState in TypeScript
 export type RootState = ReturnType<typeof store.getState>
