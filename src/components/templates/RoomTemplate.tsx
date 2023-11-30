@@ -1,21 +1,50 @@
 import { useAppDispatch, useAppSelector } from 'store'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import '../layout/style.css'
 import { layPhongTheoIDThunk } from 'store/Room'
 import { useParams } from 'react-router-dom'
 import { Search } from 'components'
+import { Button } from 'antd'
+import { useForm, SubmitHandler } from 'react-hook-form'
+import { BookingSchema, BookingSchemaType } from 'schema'
+import { zodResolver } from '@hookform/resolvers/zod'
+import cn from 'classnames'
+import { BookServices } from 'services'
+import { booked } from 'types'
+import { toast } from 'react-toastify'
 
 export const RoomTemplate = () => {
   const { locationID, roomID } = useParams()
+  const [tourist, setTourist] = useState<number>(1)
+  console.log('tourist', tourist)
+  const { handleSubmit, register, formState: { errors } } = useForm<BookingSchemaType>({
+    mode: "onChange",
+    resolver: zodResolver(BookingSchema)
+  })
   const dispatch = useAppDispatch()
   useEffect(() => {
-    dispatch(layPhongTheoIDThunk(roomID))
+    dispatch(layPhongTheoIDThunk(roomID));
+
   }, [dispatch, roomID])
   const { layPhongTheoID } = useAppSelector(state => state.Room)
   const { location } = useAppSelector(state => state.Location)
+  const { UserByID } = useAppSelector(state => state.User)
   const address = location?.find(a => a.id === Number(locationID))
-  console.log('address', address)
-  console.log('layPhongTheoID', layPhongTheoID)
+  const setSubmit: SubmitHandler<booked> = async (values) => {
+    const booking = { ...values, id: 0, maPhong: Number(roomID), maNguoiDung: UserByID?.id }
+    if (tourist === 0) {
+      toast.error('số lượng khách phải lớn hơn 0')
+    } else {
+      try {
+        await BookServices.booking(booking)
+        toast.success('Đặt phòng thành công')
+      } catch (error) {
+        toast.error(error.response.data.message)
+      }
+    }
+
+  }
+  const handleChange = (e) => { setTourist(Number(e.target.value)) }
   return (
     <div className="container-page">
       <form action="" className="form-search">
@@ -23,7 +52,7 @@ export const RoomTemplate = () => {
       </form>
       <div>
         <img className='rounded-lg my-5 shadow-lg' src={layPhongTheoID?.hinhAnh} alt="" />
-        <div className='grid sm:grid-cols-room-sm xl:grid-cols-room-xl gap-2 sm:gap-5'>
+        <div className='grid sm:grid-cols-room-sm gap-2 sm:gap-5'>
           <div className='div-room sm:col-start-1'>
             <div className='p-5'>
               <p className='title-room'>{layPhongTheoID?.tenPhong}</p>
@@ -53,14 +82,41 @@ export const RoomTemplate = () => {
                 {layPhongTheoID?.tivi ? <div><i className="fa-solid fa-tv mr-1"></i>TV</div> : ''}
                 {layPhongTheoID?.doXe ? <div><i className="fa-solid fa-square-parking mr-1"></i>parking</div> : ''}
                 {layPhongTheoID?.bep ? <div><i className="fa-solid fa-kitchen-set mr-1"></i>kitchen</div> : ''}
-                {layPhongTheoID?.mayGiat ? <div><i className="fa-regular fa-hard-drive mr-1"></i>washing machine</div> : ''}
+                {layPhongTheoID?.mayGiat ? <div><i className="fa-regular fa-hard-drive mr-1"></i>washer</div> : ''}
                 {layPhongTheoID?.banUi ? <div><i className="fa-solid fa-hot-tub-person mr-1"></i>iron</div> : ''}
               </div>
             </div>
           </div>
-          <div className='div-room sm:col-start-2 sm:row-start-1 sm:row-end-3 order-first'>
+          <div className='div-room room sm:col-start-2 sm:row-start-1 sm:row-end-4 order-first'>
             <div className='p-5'>
-              <p className='description-room'><span className='title-room'>{layPhongTheoID?.giaTien}$</span>/night</p>
+              <div className='flex items-center justify-between'>
+                <p className='description-room'><span className='title-room'>{layPhongTheoID?.giaTien}$</span>/night</p>
+                <p className='description-room cursor-pointer'><i className="fa-solid fa-star text-yellow-300"></i><span className='hover:underline'>4.85 (52 đánh giá)</span></p>
+              </div>
+              {/* Form */}
+              <form onSubmit={handleSubmit(setSubmit)}>
+                <div className='my-4'>
+                  <div className='grid grid-cols-2'>
+                    <div className={cn('check input-checkin', { "!border-red-500": errors?.ngayDen })}>
+                      <label>Checkin</label>
+                      <input className='comment-location outline-none w-full' type="datetime-local" {...register('ngayDen')} />
+                    </div>
+                    <div className={cn('check input-checkout', { "!border-red-500": errors?.ngayDi })}>
+                      <label>Checkout</label>
+                      <input className='comment-location outline-none w-full' type="datetime-local"  {...register('ngayDi')} />
+                    </div>
+                  </div>
+                  <div className={cn('check px-[10px] py-5 rounded-b-xl !border-t-0', { "border-red-500": errors?.soLuongKhach })}>
+                    <label>Tourists</label>
+                    <div className='flex justify-center'>
+                      <button type='button' className='rounded-[50%] bg-sky-100 px-2 py-1' onClick={() => { if (tourist > 1) { setTourist(tourist - 1) } }}><i className="fa-solid fa-minus text-blue-700"></i></button>
+                      <input className='w-full outline-none text-center' type="number" placeholder='People' value={tourist} {...register('soLuongKhach')} onChange={handleChange} />
+                      <button type='button' className='rounded-[50%] bg-sky-100 px-2 py-1' onClick={() => { setTourist(tourist + 1) }}><i className="fa-solid fa-plus text-blue-700"></i></button>
+                    </div>
+                  </div>
+                </div>
+                <Button htmlType='submit' className='btn-register my-2'>Đặt phòng</Button>
+              </form>
             </div>
           </div>
         </div>

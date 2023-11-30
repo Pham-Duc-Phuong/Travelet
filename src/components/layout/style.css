@@ -19,4 +19,33 @@
         padding-left: 20px;
         padding-right: 20px;
     }
+
+    .room .check {
+        padding: 4px 8px !important;
+    }
+
+    label {
+        font-size: 14px !important;
+    }
+}
+
+.room .check {
+    border: 1px solid #b3b3b3;
+    width: 100%;
+    padding: 5px 15px;
+}
+
+.room .input-checkin {
+    border-radius: 12px 0 0 0;
+}
+
+.room .input-checkout {
+    border-radius: 0 12px 0 0;
+}
+
+label {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    color: rgb(55 65 81);
 }

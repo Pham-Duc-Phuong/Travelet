@@ -16,9 +16,9 @@ type InputProp = {
 export const Input = ({ label, register, name, type = "text", error, placeholder, defaultValue}: InputProp) => {
     return (
         <div>
-            {!!label && <label className="label">{label}</label>}
+            {!!label && <label>{label}</label>}
             <input name={name} type={type} className="input" placeholder={placeholder} {...register?.(name)} defaultValue={defaultValue}/>
-            {!!error && <p className="text-[12px] text-right text-red-600">{error}</p>}
+            {!!error && <p className="error text-right">{error}</p>}
         </div>
     )
 }

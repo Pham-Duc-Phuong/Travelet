@@ -47,7 +47,7 @@ export const LocationTemplate = () => {
                   <hr className="w-[40px] my-2" />
                   <p className="comment-location"><i className="fa-solid fa-person"></i> {a.khach} tourists - <i className="fa-solid fa-bed"></i> {a.phongNgu} bedroom, {a.giuong} bed - <i className="fa-solid fa-bath"></i> {a.phongTam} bathroom</p>
                   <div className="comment-location flex flex-wrap gap-4">{a.wifi ? <div><i className="fa-solid fa-wifi mr-2"></i>Wifi</div> : ""} {a.dieuHoa ? <div><i className="fa-regular fa-snowflake mr-2"></i>air conditioner</div> : ""} {a.mayGiat ? <div><i className="fa-regular fa-hard-drive mr-2"></i>washing machine</div> : ""} </div>
-                  <p className="comment-location text-right lg:absolute lg:bottom-2 lg:right-6 py-2"><span className="text-xl font-[700] text-black">{a.giaTien}$</span>/day</p>
+                  <p className="comment-location text-right lg:absolute lg:bottom-2 lg:right-6 py-2"><span className="text-xl font-[700] text-black">{a.giaTien}$</span>/night</p>
                 </div>
               </div>
             </div>
