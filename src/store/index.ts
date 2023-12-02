@@ -4,6 +4,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { getUserByIDThunk } from "./Users";
 import { getID } from "utils";
 import { LocationThunk } from "./Location";
+import { SigninThunk } from "./Auth";
 
 export const store = configureStore({
     reducer: rootReducers
@@ -11,6 +12,7 @@ export const store = configureStore({
 
 store.dispatch(getUserByIDThunk(getID()))
 store.dispatch(LocationThunk())
+store.dispatch(SigninThunk({email:'admin@gmail.com', password:'1234'}))
 
 // UseState in TypeScript
 export type RootState = ReturnType<typeof store.getState>

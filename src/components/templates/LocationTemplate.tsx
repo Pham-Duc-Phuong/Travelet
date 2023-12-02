@@ -5,7 +5,7 @@ import { useParams, generatePath, useNavigate } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "store"
 import { LocationByPageThunk } from "store/Location"
 import { layPhongTheoViTriThunk } from "store/Room"
-import { get7DayNext, getToday } from "utils"
+import { getNextDay, getToday } from "utils"
 
 
 export const LocationTemplate = () => {
@@ -32,7 +32,7 @@ export const LocationTemplate = () => {
       <form action="" className="form-search">
         <Search />
       </form>
-      <p className="label sm:text-[14px] tracking-widest sm:mt-3">Have {layPhongTheoViTri?.length} accommodation from {getToday} to {get7DayNext}</p>
+      <p className="label sm:text-[14px] tracking-widest sm:mt-3">Have {layPhongTheoViTri?.length} accommodation from {getToday} to {getNextDay}</p>
       <h1 className="title-carousel px-0 my-3"> Accommodation in {locationChoosen?.tinhThanh} , {locationChoosen?.quocGia}</h1>
       <div className=" grid grid-cols-1 gap-5 sm:gap-7">
         {

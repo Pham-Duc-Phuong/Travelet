@@ -12,11 +12,15 @@ import cn from 'classnames'
 import { BookServices } from 'services'
 import { booked } from 'types'
 import { toast } from 'react-toastify'
+import { getCheckInDay, getCheckOutDay } from 'utils'
 
 export const RoomTemplate = () => {
   const { locationID, roomID } = useParams()
   const [tourist, setTourist] = useState<number>(1)
-  console.log('tourist', tourist)
+  const [quantityRoom, setQuantityRoom] = useState<number>(1)
+  const [checkInDay, setCheckInDay] = useState(getCheckInDay)
+  const [checkOutDay, setCheckOutDay] = useState(getCheckOutDay)
+  const tinhSoNgay = ((new Date(checkOutDay).getTime()) - (new Date(checkInDay).getTime())) / (1000 * 60 * 60 * 24)
   const { handleSubmit, register, formState: { errors } } = useForm<BookingSchemaType>({
     mode: "onChange",
     resolver: zodResolver(BookingSchema)
@@ -30,10 +34,11 @@ export const RoomTemplate = () => {
   const { location } = useAppSelector(state => state.Location)
   const { UserByID } = useAppSelector(state => state.User)
   const address = location?.find(a => a.id === Number(locationID))
+  const tinhTienPhong = layPhongTheoID?.giaTien * quantityRoom * tinhSoNgay
   const setSubmit: SubmitHandler<booked> = async (values) => {
     const booking = { ...values, id: 0, maPhong: Number(roomID), maNguoiDung: UserByID?.id }
-    if (tourist === 0) {
-      toast.error('số lượng khách phải lớn hơn 0')
+    if (tourist < 1 && quantityRoom < 1) {
+      toast.error('Số lượng khách và phòng phải lớn hơn 0')
     } else {
       try {
         await BookServices.booking(booking)
@@ -42,9 +47,7 @@ export const RoomTemplate = () => {
         toast.error(error.response.data.message)
       }
     }
-
   }
-  const handleChange = (e) => { setTourist(Number(e.target.value)) }
   return (
     <div className="container-page">
       <form action="" className="form-search">
@@ -91,7 +94,7 @@ export const RoomTemplate = () => {
             <div className='p-5'>
               <div className='flex items-center justify-between'>
                 <p className='description-room'><span className='title-room'>{layPhongTheoID?.giaTien}$</span>/night</p>
-                <p className='description-room cursor-pointer'><i className="fa-solid fa-star text-yellow-300"></i><span className='hover:underline'>4.85 (52 đánh giá)</span></p>
+                <p className='description-room cursor-pointer'><i className="fa-solid fa-star text-yellow-300"></i><span className='hover:underline'>4.85 (52 reviews)</span></p>
               </div>
               {/* Form */}
               <form onSubmit={handleSubmit(setSubmit)}>
@@ -99,23 +102,50 @@ export const RoomTemplate = () => {
                   <div className='grid grid-cols-2'>
                     <div className={cn('check input-checkin', { "!border-red-500": errors?.ngayDen })}>
                       <label>Checkin</label>
-                      <input className='comment-location outline-none w-full' type="datetime-local" {...register('ngayDen')} />
+                      <input id='ngayDen' className='comment-location outline-none w-full' type="datetime-local" {...register('ngayDen')} value={checkInDay} onChange={(e) => { setCheckInDay(e.target.value) }} />
                     </div>
                     <div className={cn('check input-checkout', { "!border-red-500": errors?.ngayDi })}>
                       <label>Checkout</label>
-                      <input className='comment-location outline-none w-full' type="datetime-local"  {...register('ngayDi')} />
+                      <input id='ngayDi' className='comment-location outline-none w-full' type="datetime-local"  {...register('ngayDi')} value={checkOutDay} onChange={(e) => { setCheckOutDay(e.target.value) }} />
+                    </div>
+                  </div>
+                  <div className={cn('check px-[10px] py-5 !border-t-0')}>
+                    <label>Room</label>
+                    <div className='flex justify-center'>
+                      <button type='button' className='btn-quantity' onClick={() => { if (quantityRoom > 1) { setQuantityRoom(quantityRoom - 1) } }}><i className="fa-solid fa-minus text-blue-700"></i></button>
+                      <input className='w-full outline-none text-center' type="number" placeholder='room' value={quantityRoom} onChange={(e) => { setQuantityRoom(Number(e.target.value)) }} />
+                      <button type='button' className='btn-quantity' onClick={() => { setQuantityRoom(quantityRoom + 1) }}><i className="fa-solid fa-plus text-blue-700"></i></button>
                     </div>
                   </div>
                   <div className={cn('check px-[10px] py-5 rounded-b-xl !border-t-0', { "border-red-500": errors?.soLuongKhach })}>
                     <label>Tourists</label>
                     <div className='flex justify-center'>
-                      <button type='button' className='rounded-[50%] bg-sky-100 px-2 py-1' onClick={() => { if (tourist > 1) { setTourist(tourist - 1) } }}><i className="fa-solid fa-minus text-blue-700"></i></button>
-                      <input className='w-full outline-none text-center' type="number" placeholder='People' value={tourist} {...register('soLuongKhach')} onChange={handleChange} />
-                      <button type='button' className='rounded-[50%] bg-sky-100 px-2 py-1' onClick={() => { setTourist(tourist + 1) }}><i className="fa-solid fa-plus text-blue-700"></i></button>
+                      <button type='button' className='btn-quantity' onClick={() => { if (tourist > 1) { setTourist(tourist - 1) } }}><i className="fa-solid fa-minus text-blue-700"></i></button>
+                      <input className='w-full outline-none text-center' type="number" placeholder='People' value={tourist} {...register('soLuongKhach')} onChange={(e) => { setTourist(Number(e.target.value)) }} />
+                      <button type='button' className='btn-quantity' onClick={() => { setTourist(tourist + 1) }}><i className="fa-solid fa-plus text-blue-700"></i></button>
                     </div>
                   </div>
                 </div>
-                <Button htmlType='submit' className='btn-register my-2'>Đặt phòng</Button>
+                <Button htmlType='submit' className='btn-register my-2'>Booking now</Button>
+                <div className='mt-4'>
+                  <div className='flex justify-between'>
+                    <p className='description-room'>{layPhongTheoID?.giaTien}$ x {quantityRoom} room x {tinhSoNgay} day</p>
+                    <p className='description-room'>{tinhTienPhong}$</p>
+                  </div>
+                  <div className='flex justify-between'>
+                    <p className='description-room'>Service charge</p>
+                    <p className='description-room'>{20 * quantityRoom}$</p>
+                  </div>
+                  <div className='flex justify-between'>
+                    <p className='description-room'>Tax</p>
+                    <p className='description-room'>{(tinhTienPhong * 0.1).toFixed(1)}$</p>
+                  </div>
+                  <hr className='my-1 sm:my-3' />
+                  <div className='flex justify-between'>
+                    <p className='description-room font-[700]'>Total</p>
+                    <p className='description-room'>{(tinhTienPhong + 20 * quantityRoom + (tinhTienPhong * 0.1)).toFixed(1)}$</p>
+                  </div>
+                </div>
               </form>
             </div>
           </div>

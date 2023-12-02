@@ -16,6 +16,7 @@ const UserSlice = createSlice({
         builder
             .addCase(getUserByIDThunk.fulfilled, (state, { payload }) => {
                 state.UserByID = payload
+                console.log('payload', payload)
             })
     },
 })

@@ -74,4 +74,7 @@
     .div-room{
         @apply border rounded-lg bg-white sm:shadow-dark-box
     }
+    .btn-quantity{
+        @apply rounded-[50%] bg-sky-100 px-[9px] py-1
+    }
 }
