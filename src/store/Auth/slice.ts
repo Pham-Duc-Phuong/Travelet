@@ -17,7 +17,14 @@ const initialState: AuthSliceInitialState = {
 const AuthSlice = createSlice({
     name: "AuthSlice",
     initialState,
-    reducers: {},
+    reducers: {
+        logOut: (state) => {
+            localStorage.removeItem('token'),
+            localStorage.removeItem('id'),
+            state.userLogin = undefined,
+            state.token = undefined
+        }
+    },
     extraReducers(builder) {
         builder
             .addCase(SigninThunk.fulfilled, (state, { payload }) => {
