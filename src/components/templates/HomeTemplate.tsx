@@ -61,7 +61,7 @@ export const HomeTemplate = () => {
           >
             {
               TouristAttraction?.map((a, index) => (
-                <SwiperSlide key={index}><div className='relative px-3 sm:hover:-translate-y-2 sm:transition-all sm:duration-700'><div className='div-carousel'><p className='title-carousel'>{a.viTri}</p><p className='p-carousel'>{a.tinhThanh}</p></div><img className='img-carousel' src={`/images/carousel-${index + 1}.jpg`} alt="" /></div></SwiperSlide>
+                <SwiperSlide key={index}><div className='relative sm:px-3 sm:hover:-translate-y-2 sm:transition-all sm:duration-700'><div className='div-carousel'><p className='title-carousel'>{a.viTri}</p><p className='p-carousel'>{a.tinhThanh}</p></div><img className='img-carousel' src={`/images/carousel-${index + 1}.jpg`} alt="" /></div></SwiperSlide>
               ))
             }
           </Swiper>

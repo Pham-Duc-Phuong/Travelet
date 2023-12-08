@@ -35,7 +35,7 @@
         @apply p-carousel text-[20px] xl:text-[25px] cursor-pointer
     }
     .img-carousel {
-        @apply w-full rounded-lg cursor-pointer shadow-dark-box
+        @apply w-full rounded-lg cursor-pointer sm:shadow-dark-box
     }
     .form-search{
         @apply max-w-screen-lg m-auto flex flex-col sm:flex-row justify-between items-center w-full my-2 sm:my-0 sm:bg-white sm:border sm:rounded-[40px] sm:shadow-lg
@@ -60,7 +60,7 @@
         @apply text-[12px] sm:text-[14px] text-gray-500
     }
     .title-location{
-        @apply text-[18px] sm:text-[22px] font-[700] text-gray-700 inline
+        @apply text-[18px] sm:text-[22px] font-[700] text-gray-700 block
     }
     /* RoomTemplate */
     .description-room{

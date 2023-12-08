@@ -33,7 +33,7 @@ export const LocationTemplate = () => {
         <Search />
       </form>
       <p className="label sm:text-[14px] tracking-widest sm:mt-5">Have {layPhongTheoViTri?.length} accommodation from {getToday} to {getNextDay}</p>
-      <h1 className="title-location mb-3"> Accommodation in {locationChoosen?.tinhThanh} , {locationChoosen?.quocGia}</h1>
+      <h1 className="title-location !pb-3"> Accommodation in {locationChoosen?.tinhThanh} , {locationChoosen?.quocGia}</h1>
       <div className=" grid grid-cols-1 gap-5 sm:gap-7">
         {
           layPhongTheoViTri?.map((a, index) => (

@@ -118,7 +118,7 @@ export const RoomTemplate = () => {
           <div className='div-room room sm:col-start-2 sm:col-end-3 sm:row-start-1 sm:row-end-4 order-first'>
             <div className='p-5'>
               <div className='flex items-center justify-between'>
-                <p className='description-room'><span className='title-location'>{layPhongTheoID?.giaTien}$</span>/night</p>
+                <p className='description-room'><span className='title-location inline'>{layPhongTheoID?.giaTien}$</span>/night</p>
                 <p className='description-room cursor-pointer'><i className="fa-solid fa-star text-yellow-300"></i><span className='hover:underline'>
                   {
                     getComment?.length ? Math.round((getComment?.reduce((total, a) => total += a.saoBinhLuan, 0) / getComment?.length) * 10) / 10 : 5
