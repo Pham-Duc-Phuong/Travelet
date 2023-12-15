@@ -52,10 +52,10 @@ export const Navbar = () => {
                                 </div>
                                 <ul className="py-2" aria-labelledby="user-menu-button">
                                     <li>
-                                        <a href="#" className="a-navbar-dropdown">Account</a>
+                                        <a href="#" className="a-navbar-dropdown" onClick={() => { navigate(PATH.account) }}>Account</a>
                                     </li>
                                     <li>
-                                        <a href="#" className="a-navbar-dropdown">Admin</a>
+                                        <a href="#" className="a-navbar-dropdown" onClick={() => { navigate(PATH.admin) }}>Admin</a>
                                     </li>
                                     <li>
                                         <a href="#" className="a-navbar-dropdown" onClick={() => { dispatch(AuthActions.logOut()) }}>Sign out</a>
@@ -64,7 +64,6 @@ export const Navbar = () => {
                             </div>
                         </div> : <div className="flex"><p className="p-carousel p-0" onClick={() => { navigate(PATH.login) }}>Login</p><span className="p-carousel sm:px-4">|</span><p className="p-carousel p-0" onClick={() => { navigate(PATH.register) }}>Register</p></div>}
                         <button id="btn-menu" type="button" className="inline-flex items-center w-10 h-10 justify-center text-sm text-black rounded-lg md:hidden" onClick={() => { DropDown() }}>
-                            <span className="sr-only">Open main menu</span>
                             <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
                                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M1 1h15M1 7h15M1 13h15" />
                             </svg>
@@ -76,7 +75,7 @@ export const Navbar = () => {
                                 <a href="#" className="a-navbar-menu" onClick={() => { navigate('/') }}>Home</a>
                             </li>
                             <li>
-                                <a href="#" className="a-navbar-menu">About</a>
+                                <a href="#" className="a-navbar-menu">Location</a>
                             </li>
                             <li>
                                 <a href="#" className="a-navbar-menu">Services</a>

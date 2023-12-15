@@ -2,7 +2,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'; import { Autoplay } from 'sw
 import { PATH } from 'constant';
 import { Search } from 'components';
 export const HomeTemplate = () => {
-  const TouristAttraction = [{ viTri: 'Ha Long Bay', tinhThanh: 'Quang Ninh, Viet Nam' }, { viTri: 'Hoi An', tinhThanh: 'Quang Nam, Viet Nam' }, { viTri: 'Terraces', tinhThanh: 'Bac Kan, Viet Nam' }, { viTri: 'Ban Giooc Waterfall', tinhThanh: 'Lang Son, Viet Nam' }, { viTri: 'Notre Dame Cathedral', tinhThanh: 'Ho Chi Minh, Viet Nam' }, { viTri: 'Rong Bridge', tinhThanh: 'Da Nang, Viet Nam' }, { viTri: ' Ho Guom', tinhThanh: 'Ha Noi, Viet Nam' },]
+  const TouristAttraction = [{ id: 4, viTri: 'Ha Long Bay', tinhThanh: 'Quang Ninh, Viet Nam' }, { id: 6, viTri: 'Hoi An', tinhThanh: 'Quang Nam, Viet Nam' }, { id: 4, viTri: 'Terraces', tinhThanh: 'Bac Kan, Viet Nam' }, { id: 4, viTri: 'Ban Giooc Waterfall', tinhThanh: 'Lang Son, Viet Nam' }, { id: 1, viTri: 'Notre Dame Cathedral', tinhThanh: 'Ho Chi Minh, Viet Nam' }, { id: 6, viTri: 'Rong Bridge', tinhThanh: 'Da Nang, Viet Nam' }, { id: 4, viTri: ' Ho Guom', tinhThanh: 'Ha Noi, Viet Nam' },]
   const TouristHobby = [{ viTri: 'Full house' }, { viTri: 'Unique house' }, { viTri: 'Farm & Nature' }, { viTri: 'Allow for pet' },]
   const dispatch = useAppDispatch()
   useEffect(() => {
@@ -31,6 +31,7 @@ export const HomeTemplate = () => {
                 <div key={a.id} className='bg-white rounded-lg hover:bg-cyan-50 transition-all duration-500 cursor-pointer' onClick={() => {
                   const path = generatePath(PATH.location, { locationID: a.id })
                   navigate(path)
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
                 }}>
                   <div className='flex items-center border p-1 sm:p-2 rounded-lg shadow-md'>
                     <img className='h-14 w-14 sm:h-24 sm:w-24 rounded-lg' src={a.hinhAnh} alt="" />
@@ -61,7 +62,11 @@ export const HomeTemplate = () => {
           >
             {
               TouristAttraction?.map((a, index) => (
-                <SwiperSlide key={index}><div className='relative sm:px-3 sm:hover:-translate-y-2 sm:transition-all sm:duration-700'><div className='div-carousel'><p className='title-carousel'>{a.viTri}</p><p className='p-carousel'>{a.tinhThanh}</p></div><img className='img-carousel' src={`/images/carousel-${index + 1}.jpg`} alt="" /></div></SwiperSlide>
+                <SwiperSlide key={index}><div className='relative sm:px-3 sm:hover:-translate-y-2 sm:transition-all sm:duration-700' onClick={() => {
+                  const path = generatePath(PATH.location, { locationID: a.id })
+                  navigate(path)
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                }}><div className='div-carousel'><p className='title-carousel'>{a.viTri}</p><p className='p-carousel'>{a.tinhThanh}</p></div><img className='img-carousel' src={`/images/carousel-${index + 1}.jpg`} alt="" /></div></SwiperSlide>
               ))
             }
           </Swiper>
@@ -72,7 +77,9 @@ export const HomeTemplate = () => {
           <div className='grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8'>
             {
               TouristHobby?.map((a, index) => (
-                <div key={index} className='relative hover:-translate-y-2 transition-all duration-700'>
+                <div key={index} className='relative hover:-translate-y-2 transition-all duration-700' onClick={() => {
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                }}>
                   <img className='rounded-lg cursor-pointer shadow-dark-box' src={`/images/hobbyTravel-${index + 1}.jpg`} alt="" />
                   <div className='div-service'><p className='title-service'>{a.viTri}</p></div>
                 </div>
