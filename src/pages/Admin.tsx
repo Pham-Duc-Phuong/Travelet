@@ -1,4 +1,4 @@
-import { AdminTemplate } from "components/templates/AdminTemplate"
+import { AdminTemplate } from "components/templates/Admin/AdminTemplate"
 
 export const Admin = () => {
   return (

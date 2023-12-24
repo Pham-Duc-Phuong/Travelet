@@ -75,7 +75,7 @@ export const Navbar = () => {
                                 <a href="#" className="a-navbar-menu" onClick={() => { navigate('/') }}>Home</a>
                             </li>
                             <li>
-                                <a href="#" className="a-navbar-menu">Location</a>
+                                <a href="#" className="a-navbar-menu" onClick={() => { navigate(PATH.travel) }}>Travel</a>
                             </li>
                             <li>
                                 <a href="#" className="a-navbar-menu">Services</a>

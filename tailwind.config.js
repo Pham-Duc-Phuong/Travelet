@@ -26,6 +26,7 @@ export default {
       gridTemplateColumns: {
         'search': 'repeat(4, 1fr) 48px',
         'room-sm': '60% auto',
+        'account': "30% auto",
       },
     },
   },

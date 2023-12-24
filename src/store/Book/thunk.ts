@@ -3,9 +3,9 @@ import { BookServices } from "services";
 
 export const listBookedThunk = createAsyncThunk(
     "checkBookedThunk",
-    async (_, { rejectWithValue }) => {
+    async (payload: number, { rejectWithValue }) => {
         try {
-            const data = await BookServices.listBooked()
+            const data = await BookServices.listBooked(payload)
             return data.data.content
         } catch (error) {
             return rejectWithValue(error)

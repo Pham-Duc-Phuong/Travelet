@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Room } from "types";
-import { layPhongTheoIDThunk, layPhongTheoViTriThunk } from ".";
+import { layPhongTheoIDThunk, layPhongTheoViTriThunk, layPhongThunk } from ".";
 
 type RoomSliceInitialState = {
+    layPhong?: Room[]
     layPhongTheoViTri?: Room[]
     layPhongTheoID?: Room
 }
@@ -17,6 +18,9 @@ const RoomSlice = createSlice({
     reducers: {},
     extraReducers(builder) {
         builder
+            .addCase(layPhongThunk.fulfilled, (state, { payload }) => {
+                state.layPhong = payload
+            })
             .addCase(layPhongTheoViTriThunk.fulfilled, (state, { payload }) => {
                 state.layPhongTheoViTri = payload
             })

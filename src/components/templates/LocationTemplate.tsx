@@ -20,7 +20,7 @@ export const LocationTemplate = () => {
   const { locationByPage } = useAppSelector(state => state.Location)
   const locationChoosen = locationByPage?.find(a => a.id === Number(locationID))
   const detailRoom = (setRoomID) => {
-    const path = generatePath(PATH.room, { locationID: locationID, roomID: setRoomID });
+    const path = generatePath(PATH.room, { roomID: setRoomID });
     navigate(path)
   }
   const setLike = (index) => {
@@ -34,10 +34,10 @@ export const LocationTemplate = () => {
       </form>
       <p className="label sm:text-[14px] tracking-widest sm:mt-5">Have {layPhongTheoViTri?.length} accommodation from {getToday} to {getNextDay}</p>
       <h1 className="title-location !pb-3"> Accommodation in {locationChoosen?.tinhThanh} , {locationChoosen?.quocGia}</h1>
-      <div className=" grid grid-cols-1 gap-5 sm:gap-7">
+      <div className="grid grid-cols-1 gap-5 sm:gap-7">
         {
           layPhongTheoViTri?.map((a, index) => (
-            <div key={a.id} className="relative">
+            <div key={a.id} className="relative" onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
               <i id={`heart${index}`} className="fa-regular fa-heart text-red-500 absolute lg:top-4 lg:right-6 lg:left-auto sm:left-6 bottom-4 left-3 text-2xl" onClick={() => { setLike(index) }}></i>
               <div className="w-full grid grid-cols-1 lg:grid-cols-2 rounded-lg bg-white shadow-lg cursor-pointer hover:bg-sky-50 transition-all duration-500" onClick={() => { detailRoom(a.id) }}>
                 <img src={a.hinhAnh} className="h-full rounded-t-lg lg:rounded-l-lg lg:rounded-r-none" alt="" />

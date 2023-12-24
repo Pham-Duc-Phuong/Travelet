@@ -1,5 +1,5 @@
 import { RouteObject } from "react-router-dom";
-import { Authlayout, Mainlayout } from "components"
+import { Authlayout, Mainlayout, TravelTemplate } from "components"
 import { PATH } from "constant";
 import { Account, Admin, Home, Location, Login, Register, Room } from "pages";
 
@@ -22,11 +22,15 @@ export const router: RouteObject[] = [
             },
             {
                 path: PATH.account,
-                element: <Account />
+                element: <Account />,
             },
             {
                 path: PATH.admin,
                 element: <Admin />
+            },
+            {
+                path: PATH.travel,
+                element: <TravelTemplate />
             },
         ]
     },

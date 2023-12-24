@@ -86,4 +86,8 @@
     .account-active{
         @apply border-b-4 border-blue-700 text-blue-700
     }
+    /* ADMIN */
+    .p-admin{
+        @apply description-room border border-blue-600 px-2 py-1 rounded-lg text-blue-600 cursor-pointer hover:text-white hover:bg-blue-600 duration-500
+    }
 }

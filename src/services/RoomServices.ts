@@ -6,6 +6,7 @@ const api = apiInstance({
 })
 
 export const RoomServices = {
+    layPhong: () => api.get<ApiResponse<Room[]>>(''),
     layPhongTheoViTri: (maViTri: string) => api.get<ApiResponse<Room[]>>(`/lay-phong-theo-vi-tri?maViTri=${maViTri}`),
-    layPhongTheoID: (id: string) => api.get<ApiResponse<Room>>(`/${id}`)
+    layPhongTheoID: (id: string) => api.get<ApiResponse<Room>>(`/${id}`),
 }

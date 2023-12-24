@@ -17,7 +17,7 @@ import { getCheckInDay, getCheckOutDay } from 'utils'
 import { getCommentThunk } from 'store/Comment'
 
 export const RoomTemplate = () => {
-  const { locationID, roomID } = useParams()
+  const { roomID } = useParams()
   const [tourist, setTourist] = useState<number>(1)
   const [quantityRoom, setQuantityRoom] = useState<number>(1)
   const [checkInDay, setCheckInDay] = useState(getCheckInDay)
@@ -37,10 +37,8 @@ export const RoomTemplate = () => {
     dispatch(getCommentThunk(roomID))
   }, [dispatch, roomID])
   const { layPhongTheoID } = useAppSelector(state => state.Room)
-  const { location } = useAppSelector(state => state.Location)
   const { UserByID } = useAppSelector(state => state.User)
   const { getComment } = useAppSelector(state => state.Comment)
-  const address = location?.find(a => a.id === Number(locationID))
   const tinhTienPhong = layPhongTheoID?.giaTien * quantityRoom * tinhSoNgay
   const [setScreen, isSetScreen] = useState<number>(window.innerWidth)
   const handleScreen = () => { isSetScreen(window.innerWidth) }; window.addEventListener('resize', handleScreen); let slidesPerView = 0; let spaceBetween = 0; if (setScreen < 639) { slidesPerView = 2; spaceBetween = 5 } else { slidesPerView = 4; spaceBetween = 10 }
@@ -84,8 +82,7 @@ export const RoomTemplate = () => {
           <div className='div-room sm:col-start-1 sm:col-end-2'>
             <div className='p-5'>
               <p className='title-location'>{layPhongTheoID?.tenPhong}</p>
-              <p className='decription-room hover:underline cursor-pointer'>{address?.tenViTri}, {address?.tinhThanh}, {address?.quocGia}</p>
-              <hr className='my-3' />
+              <hr className='my-3'/>
               <p className='description-room'>{layPhongTheoID?.moTa}</p>
             </div>
           </div>
