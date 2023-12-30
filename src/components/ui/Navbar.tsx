@@ -15,6 +15,9 @@ export const Navbar = () => {
         navbarUser.classList.toggle('phone:hidden')
         navbarUser.classList.toggle('phone:block')
     }
+    const DropUser = () => {
+        document.querySelector('#user-dropdown').classList.toggle('hidden')
+    }
     const [setScroll, isSetSecroll] = useState<boolean>(false)
 
     const handleScroll = () => {
@@ -39,13 +42,13 @@ export const Navbar = () => {
                         <img src="/images/logo (3).png" className="h-[30px] sm:h-[45px] rounded-[50%]" alt="Flowbite Logo" />
                         <span className="self-center text-xl sm:text-2xl font-semibold whitespace-nowrap text-white drop-shadow-logo">Travelet</span>
                     </a>
-                    <div className="flex items-center md:order-2 space-x-1 md:space-x-0 rtl:space-x-reverse">
+                    <div className="flex relative items-center md:order-2 space-x-1 md:space-x-0 rtl:space-x-reverse">
                         {token ? <div>
-                            <button type="button" className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+                            <button type="button" className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300" id="user-menu-button" onClick={DropUser}>
                                 <span className="sr-only">Open user menu</span>
                                 <img className="w-8 h-8 rounded-full" src={UserByID?.avatar} alt="user photo" />
                             </button>
-                            <div className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow" id="user-dropdown">
+                            <div className="z-50 hidden absolute my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow" id="user-dropdown">
                                 <div className="px-4 py-3">
                                     <span className="block text-sm text-gray-900 dark:text-white">{UserByID?.name}</span>
                                     <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">{UserByID?.email}</span>

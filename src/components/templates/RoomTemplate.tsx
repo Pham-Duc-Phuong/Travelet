@@ -21,9 +21,7 @@ export const RoomTemplate = () => {
   const [tourist, setTourist] = useState<number>(1)
   const [quantityRoom, setQuantityRoom] = useState<number>(1)
   const [checkInDay, setCheckInDay] = useState(getCheckInDay)
-  console.log('checkInDay', checkInDay)
   const [checkOutDay, setCheckOutDay] = useState(getCheckOutDay)
-  console.log('checkOutDay', checkOutDay)
   const tinhSoNgay = Math.round(((new Date(checkOutDay).getTime()) - (new Date(checkInDay).getTime())) / (1000 * 60 * 60 * 24))
   const { handleSubmit: handleSubmit1, register: register1, formState: { errors: errors1 } } = useForm<BookingSchemaType>({
     mode: "onChange",
