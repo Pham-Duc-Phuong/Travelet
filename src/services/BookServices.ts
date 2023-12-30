@@ -6,5 +6,6 @@ const api = apiInstance({
 })
 export const BookServices = {
     booking: (data: booked) => api.post<ApiResponse_1<booked>>("", data),
-    listBooked: (query: number) => api.get<ApiResponse<booked[]>>(`/lay-theo-nguoi-dung/${query}`)
+    listBooked: () => api.get<ApiResponse<booked[]>>(""),
+    listBookedByUser: (query: number) => api.get<ApiResponse<booked[]>>(`/lay-theo-nguoi-dung/${query}`)
 }

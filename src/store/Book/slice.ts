@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { booked } from "types"
-import { listBookedThunk } from "."
+import { listBookedByUserThunk, listBookedThunk } from "."
 
 type BookInitialState = {
     listBooked?: booked[]
+    listBookedByUser?: booked[]
 }
 const initialState: BookInitialState = {
 
@@ -16,6 +17,9 @@ const BookSlice = createSlice({
         builder
             .addCase(listBookedThunk.fulfilled, (state, { payload }) => {
                 state.listBooked = payload
+            })
+            .addCase(listBookedByUserThunk.fulfilled, (state, { payload }) => {
+                state.listBookedByUser = payload
             })
     },
 })
