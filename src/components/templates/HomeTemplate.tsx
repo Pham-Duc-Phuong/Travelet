@@ -1,12 +1,15 @@
 import { Swiper, SwiperSlide } from 'swiper/react'; import { Autoplay } from 'swiper/modules'; import 'swiper/css'; import 'swiper/css/pagination'; import { useEffect, useState } from 'react'; import { useAppDispatch, useAppSelector } from 'store'; import { LocationByPageThunk } from 'store/Location'; import '../layout/style.css'; import { generatePath, useNavigate } from 'react-router-dom'
 import { PATH } from 'constant';
 import { Search } from 'components';
+import { getUserByIDThunk } from 'store/Users';
+import { getID } from 'utils';
 export const HomeTemplate = () => {
   const TouristAttraction = [{ id: 4, viTri: 'Ha Long Bay', tinhThanh: 'Quang Ninh, Viet Nam' }, { id: 6, viTri: 'Hoi An', tinhThanh: 'Quang Nam, Viet Nam' }, { id: 4, viTri: 'Terraces', tinhThanh: 'Bac Kan, Viet Nam' }, { id: 4, viTri: 'Ban Giooc Waterfall', tinhThanh: 'Lang Son, Viet Nam' }, { id: 1, viTri: 'Notre Dame Cathedral', tinhThanh: 'Ho Chi Minh, Viet Nam' }, { id: 6, viTri: 'Rong Bridge', tinhThanh: 'Da Nang, Viet Nam' }, { id: 4, viTri: ' Ho Guom', tinhThanh: 'Ha Noi, Viet Nam' },]
   const TouristHobby = [{ viTri: 'Full house' }, { viTri: 'Unique house' }, { viTri: 'Farm & Nature' }, { viTri: 'Allow for pet' },]
   const dispatch = useAppDispatch()
   useEffect(() => {
     dispatch(LocationByPageThunk())
+    dispatch(getUserByIDThunk(getID()))
   }, [dispatch])
   const { locationByPage } = useAppSelector(state => state.Location)
   const navigate = useNavigate()

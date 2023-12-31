@@ -10,9 +10,9 @@ export const store = configureStore({
     reducer: rootReducers
 })
 
+store.dispatch(SigninThunk({email:'admin@gmail.com', password:'1234'}))
 store.dispatch(getUserByIDThunk(getID()))
 store.dispatch(LocationThunk())
-store.dispatch(SigninThunk({email:'admin@gmail.com', password:'1234'}))
 
 // UseState in TypeScript
 export type RootState = ReturnType<typeof store.getState>
