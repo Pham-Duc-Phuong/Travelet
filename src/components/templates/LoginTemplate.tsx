@@ -1,4 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod"; import { Input } from "components"; import { useForm, SubmitHandler } from "react-hook-form"; import { LoginSchema, LoginSchemaType } from "schema"; import { useAppDispatch, useAppSelector } from "store"; import { SigninThunk } from "store/Auth"; import { toast } from "react-toastify"; import { useNavigate } from "react-router-dom"; import { Button } from "antd";
+import { getUserByIDThunk } from "store/Users";
+import { getID } from "utils";
 export const LoginTemplate = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
@@ -8,7 +10,9 @@ export const LoginTemplate = () => {
     resolver: zodResolver(LoginSchema)
   })
   const setSubmit: SubmitHandler<LoginSchemaType> = (values) => {
-    dispatch(SigninThunk(values)).unwrap().then(() => { navigate("/"), toast.success('LoginSuccess') }).catch((error) => { toast.error(error.response.data.message) })
+    dispatch(SigninThunk(values)).unwrap().then(() => {
+      navigate("/"), toast.success('LoginSuccess'), dispatch(getUserByIDThunk(getID()))
+    }).catch((error) => { toast.error(error.response.data.message) })
   }
   return (
     <div>
