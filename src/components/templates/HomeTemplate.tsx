@@ -78,7 +78,7 @@ export const HomeTemplate = () => {
             {
               TouristHobby?.map((a, index) => (
                 <div key={index} className='relative hover:-translate-y-2 transition-all duration-700' onClick={() => {
-                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                  window.scrollTo({ top: 0, behavior: 'smooth' }), navigate(PATH.location)
                 }}>
                   <img className='rounded-lg cursor-pointer shadow-dark-box' src={`/images/hobbyTravel-${index + 1}.jpg`} alt="" />
                   <div className='div-service'><p className='title-service'>{a.viTri}</p></div>
