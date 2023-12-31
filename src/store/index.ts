@@ -4,13 +4,11 @@ import { configureStore } from "@reduxjs/toolkit";
 import { getUserByIDThunk } from "./Users";
 import { getID } from "utils";
 import { LocationThunk } from "./Location";
-import { SigninThunk } from "./Auth";
 
 export const store = configureStore({
     reducer: rootReducers
 })
 
-store.dispatch(SigninThunk({email:'admin@gmail.com', password:'1234'}))
 store.dispatch(getUserByIDThunk(getID()))
 store.dispatch(LocationThunk())
 
